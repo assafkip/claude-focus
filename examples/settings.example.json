@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "python3 ~/.claude/hooks/claude-focus/token-guard.py" },
+          { "type": "command", "command": "python3 ~/.claude/hooks/claude-focus/echo-of-prompt.py" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "python3 ~/.claude/hooks/claude-focus/token-guard.py" }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "python3 ~/.claude/hooks/claude-focus/verification-gate.py" }
+        ]
+      }
+    ]
+  }
+}

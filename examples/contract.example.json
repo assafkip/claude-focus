@@ -1,0 +1,7 @@
+{
+  "name": "daily-report",
+  "required_file": "output/report-{date}.json",
+  "required_keys": ["summary", "action_items", "sources"],
+  "min_size_bytes": 200,
+  "active": true
+}
