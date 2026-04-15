@@ -1,21 +1,30 @@
 # claude-focus
 
-**Three hooks that fix Claude Code's attention drift.**
+**Three hooks that fix Claude Code's attention drift.** ~550 lines of Python. Zero dependencies.
 
 Claude Code has the same executive function problems humans do. It forgets instructions mid-session. Rushes output. Self-reports "done" without verifying. Retries failed calls instead of diagnosing. Spawns agents that produce nothing. Burns 40k tokens to change one line.
 
 Research calls it *Lost in the Middle* ([Liu et al., 2023](https://arxiv.org/abs/2307.03172)) and multi-turn drift ([Laban et al., 2025](https://arxiv.org/abs/2505.06120)). Everyone has felt it.
 
-claude-focus is three PreToolUse / Stop hooks that stop it. Deterministic. ~550 lines of Python. No dependencies.
+claude-focus is three PreToolUse / Stop hooks that stop it. Deterministic. No LLM calls in the hot path.
 
 ## Install
 
 ```bash
 git clone https://github.com/assafkip/claude-focus.git ~/.claude/hooks/claude-focus
+```
+
+Then wire the hooks into your settings. **If you already have `~/.claude/settings.json`, merge the `hooks` block manually — don't overwrite.** If you don't:
+
+```bash
 cp ~/.claude/hooks/claude-focus/examples/settings.example.json ~/.claude/settings.json
 ```
 
 Open Claude Code. The hooks are live.
+
+### Verify it's wired
+
+In any Claude Code session, ask it to do something that forces a retry loop (e.g., `read a file that doesn't exist, then retry 3 times`). You should see a block message from `token-guard.py` instead of a fourth attempt. If you don't, the hook isn't picking up — check your `~/.claude/settings.json` and confirm the `command` paths resolve.
 
 ## What each hook does
 
@@ -36,6 +45,8 @@ Counts tool calls per user message. Catches the eleven failure modes the researc
 | 5 greps since last write | Searching instead of working | Warn |
 | 3 agents with no output between them | Agents not producing | Warn |
 | 2 min + 10 calls since last write | Time-based stall | Warn |
+
+Secret exfiltration check (row 6) is a security guardrail, not just attention control. Claude can't accidentally touch `.env`, `.pem`, `.key` even if a tool call tries.
 
 Example block message sent back to Claude:
 
