@@ -132,3 +132,7 @@ These three hooks are extracted from [claude-cortex](https://github.com/assafkip
 ## License
 
 MIT
+
+---
+
+I built these hooks for my own Claude Code work and open-sourced them. I ship paid Claude Code kits for founders at https://claudedaddy.gumroad.com, and I build these systems for teams that want one wired to their own setup. Book a call: https://calendar.app.google/cMFvhvDsfi9iyWYy9
