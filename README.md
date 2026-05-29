@@ -114,23 +114,6 @@ The defaults are sane for everyday coding. Full list lives in each hook's source
 
 claude-focus is attention control. It catches deterministic patterns. It does not read intent and it will not fix a vague prompt. It stops the spinning, not the thinking.
 
-## Questions people ask
-
-**How do I stop Claude Code from burning tokens on a runaway session?**
-Add a deterministic PreToolUse hook that counts tool calls and hard-stops at a ceiling. claude-focus ships one. It blocks the turn at 30 calls by default, before the spend compounds. No model sits in the loop, so it cannot be talked out of the stop.
-
-**Why does Claude Code keep retrying the same failed call?**
-It loses the thread mid-session and re-attempts instead of diagnosing. token-guard.py detects the retry loop and blocks it, then tells the model to change approach. The pattern is deterministic, so a hook catches it where a better prompt cannot.
-
-**How do I make Claude Code stop reporting "done" when the work is not done?**
-Run a Stop hook that checks for a real result before it lets the turn end. verification-gate.py blocks a false "done" and forces the model to show what it actually produced. It is hardened so it never traps the session in a loop.
-
-**Can I cap how many tool calls Claude Code makes per session?**
-Yes. Set `CLAUDE_FOCUS_VOLUME_CEILING` to your number and the hook hard-stops there. Default is 30. This is the single most effective guard against a session that spins.
-
-**What is the difference between claude-focus and the Token Guard Kit?**
-claude-focus is three free hooks, MIT, install-it-yourself. The Token Guard Kit is the hardened build: 11 runaway patterns instead of one ceiling, 35 tests you can run, three profiles (safe, aggressive, paranoid), a two-minute installer, and per-OS guides. Free hooks here. Paid kit at https://claudedaddy.gumroad.com/l/yybwrk.
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
