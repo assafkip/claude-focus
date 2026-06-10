@@ -124,6 +124,6 @@ I built these hooks for my own Claude Code work and open-sourced them. This repo
 
 The full **Token Guard Kit** adds a 35-test pytest suite shipped green, three tuning profiles (safe / aggressive / paranoid), a deadlock-proof Stop gate, an instruction-budget preflight CLI, advanced pipeline reliability modules, and a two-minute installer with per-OS guides: https://claudedaddy.gumroad.com/l/yybwrk
 
-More kits for founders building on Claude Code: https://claudedaddy.gumroad.com
+More kits for founders building on Claude Code: https://claudedaddy.io
 
 Want one wired to your own setup, or a larger Claude Code reliability system built around it? I build these for teams. Book a call: https://calendar.app.google/cMFvhvDsfi9iyWYy9
